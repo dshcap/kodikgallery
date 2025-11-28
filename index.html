@@ -1,245 +1,226 @@
-import { motion } from 'motion/react';
-import { Phone, Mail, Instagram, MessageCircle, Zap, Award, Clock, CheckCircle } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Modern CTA Gallery – ALTHOUSE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-export function ModernCTASlide() {
-  const benefits = [
-    { icon: Award, text: '15 lat doświadczenia' },
-    { icon: Clock, text: 'Montaż w 1 dzień' },
-    { icon: CheckCircle, text: '10 lat gwarancji' },
-    { icon: Zap, text: 'Darmowy pomiar' }
-  ];
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: black;
+        color: white;
+    }
 
-  return (
-    <div className="relative w-full h-full bg-black overflow-hidden">
-      {/* Animated gradient background */}
-      <motion.div
-        className="absolute inset-0"
-        animate={{
-          background: [
-            'radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.4) 0%, transparent 50%), radial-gradient(circle at 70% 50%, rgba(236, 72, 153, 0.4) 0%, transparent 50%)',
-            'radial-gradient(circle at 70% 50%, rgba(139, 92, 246, 0.4) 0%, transparent 50%), radial-gradient(circle at 30% 50%, rgba(236, 72, 153, 0.4) 0%, transparent 50%)',
-            'radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.4) 0%, transparent 50%), radial-gradient(circle at 70% 50%, rgba(236, 72, 153, 0.4) 0%, transparent 50%)'
-          ]
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-      />
+    /* Контейнер */
+    .gallery-wrapper {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        overflow: hidden;
+        padding: 40px 20px;
+        box-sizing: border-box;
+    }
 
-      {/* Mesh gradient overlay */}
-      <div className="absolute inset-0 opacity-50">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.3) 0%, transparent 50%),
-            radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.2) 0%, transparent 50%)
-          `
-        }} />
-      </div>
+    /* Фон с градиентами */
+    .gradient-bg {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 30% 50%, rgba(139,92,246,0.4), transparent 60%),
+                    radial-gradient(circle at 70% 50%, rgba(236,72,153,0.4), transparent 60%);
+        animation: bgmove 8s linear infinite;
+        z-index: 1;
+    }
 
-      {/* Animated particles */}
-      {[...Array(20)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-white rounded-full"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            y: [0, -50, 0],
-            opacity: [0, 1, 0],
-            scale: [0, 1.5, 0]
-          }}
-          transition={{
-            duration: 3 + Math.random() * 2,
-            repeat: Infinity,
-            delay: Math.random() * 3
-          }}
-        />
-      ))}
+    @keyframes bgmove {
+        0% {background-position: 30% 50%, 70% 50%;}
+        50% {background-position: 70% 50%, 30% 50%;}
+        100% {background-position: 30% 50%, 70% 50%;}
+    }
 
-      {/* Content */}
-      <div className="relative h-full flex flex-col p-8 text-white">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-6"
-        >
-          <motion.div
-            animate={{
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="inline-block mb-4"
-          >
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-xl opacity-60" />
-              <div className="relative bg-gradient-to-br from-purple-500 to-pink-500 p-4 rounded-full">
-                <Zap className="w-8 h-8 text-white" />
-              </div>
-            </div>
-          </motion.div>
-          
-          <h2 className="text-4xl mb-2 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
-            Gotowy na zmianę?
-          </h2>
-          <p className="text-white/70 text-sm">
-            Twój wymarzony sufit jest w zasięgu ręki
-          </p>
-        </motion.div>
+    /* Частицы */
+    .particle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: white;
+        border-radius: 50%;
+        opacity: 0;
+        animation: particleAnim 4s infinite linear;
+    }
 
-        {/* Benefits grid */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 }}
-          className="grid grid-cols-2 gap-3 mb-6"
-        >
-          {benefits.map((benefit, index) => {
-            const Icon = benefit.icon;
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                className="bg-white/5 backdrop-blur-xl rounded-2xl p-4 border border-white/10 hover:border-white/20 transition-all group"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-2 rounded-xl group-hover:shadow-lg transition-all">
-                    <Icon className="w-4 h-4 text-white" />
-                  </div>
-                  <span className="text-xs text-white/90">{benefit.text}</span>
-                </div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+    @keyframes particleAnim {
+        0% { transform: translateY(0); opacity: 0; }
+        20% { opacity: 1; }
+        50% { transform: translateY(-60px); opacity: 1; }
+        100% { transform: translateY(0); opacity: 0; }
+    }
 
-        {/* Special offer */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.6 }}
-          className="relative mb-6 overflow-hidden"
-        >
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600"
-            animate={{
-              x: ['-100%', '100%']
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            style={{ filter: 'blur(20px)', opacity: 0.3 }}
-          />
-          <div className="relative bg-gradient-to-br from-purple-600 to-pink-600 rounded-3xl p-5 shadow-2xl">
-            <div className="flex items-center justify-between mb-3">
-              <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs">
-                ⚡ OFERTA SPECJALNA
-              </span>
-              <motion.div
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="text-2xl"
-              >
-                🎁
-              </motion.div>
-            </div>
-            <h3 className="text-xl mb-2">
-              Bezpłatny projekt 3D
-            </h3>
-            <p className="text-white/80 text-sm">
-              Przy zamówieniu do końca miesiąca
-            </p>
-          </div>
-        </motion.div>
+    /* Заголовок */
+    h1 {
+        font-size: 40px;
+        text-align: center;
+        background: linear-gradient(to right, white, #e9d5ff, #fbcfe8);
+        -webkit-background-clip: text;
+        color: transparent;
+        z-index: 10;
+        position: relative;
+        margin-top: 50px;
+    }
 
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="space-y-3 mb-6"
-        >
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full bg-white text-black py-4 rounded-2xl shadow-xl flex items-center justify-center gap-3 relative overflow-hidden group"
-          >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity"
-            />
-            <Phone className="w-5 h-5 relative z-10 group-hover:text-white transition-colors" />
-            <span className="relative z-10 group-hover:text-white transition-colors">
-              Zadzwoń teraz
-            </span>
-          </motion.button>
+    p.subtitle {
+        text-align: center;
+        color: rgba(255,255,255,0.75);
+        margin-bottom: 40px;
+        font-size: 14px;
+        z-index: 10;
+        position: relative;
+    }
 
-          <div className="grid grid-cols-3 gap-3">
-            {[
-              { icon: Mail, label: 'Email' },
-              { icon: Instagram, label: 'Instagram' },
-              { icon: MessageCircle, label: 'WhatsApp' }
-            ].map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.button
-                  key={index}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1 + index * 0.1 }}
-                  className="bg-white/10 backdrop-blur-xl hover:bg-white/20 border border-white/20 py-3 rounded-xl flex flex-col items-center gap-2 transition-all"
-                >
-                  <Icon className="w-5 h-5" />
-                  <span className="text-xs">{item.label}</span>
-                </motion.button>
-              );
-            })}
-          </div>
-        </motion.div>
+    /* Сетка преимуществ */
+    .benefits {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        padding: 0 20px;
+        z-index: 10;
+        position: relative;
+        margin-bottom: 40px;
+    }
 
-        {/* Footer */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="text-center mt-auto"
-        >
-          <p className="text-xl mb-1 bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
-            SUFITY NAPINANE
-          </p>
-          <p className="text-white/50 text-xs">
-            Transformujemy wnętrza od 2009
-          </p>
-          <div className="flex items-center justify-center gap-2 mt-3">
-            {[...Array(3)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"
-                animate={{
-                  scale: [1, 1.3, 1],
-                  opacity: [0.5, 1, 0.5]
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: i * 0.3
-                }}
-              />
-            ))}
-          </div>
-        </motion.div>
-      </div>
+    .benefit-box {
+        padding: 12px;
+        border-radius: 15px;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        backdrop-filter: blur(8px);
+        text-align: center;
+        transition: 0.3s;
+        font-size: 13px;
+    }
+    .benefit-box:hover {
+        transform: translateY(-4px);
+        border-color: white;
+    }
+
+    /* Спец предложение */
+    .special-offer {
+        background: linear-gradient(135deg, #7c3aed, #ec4899);
+        padding: 25px;
+        margin: 0 20px 40px;
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+        z-index: 10;
+    }
+
+    .special-offer span {
+        display: inline-block;
+        background: rgba(255,255,255,0.25);
+        padding: 6px 12px;
+        border-radius: 20px;
+        margin-bottom: 12px;
+        font-size: 12px;
+    }
+
+    /* Кнопка CTA */
+    .cta-button {
+        width: calc(100% - 40px);
+        margin: 0 auto 20px;
+        padding: 18px;
+        background: white;
+        color: black;
+        border-radius: 15px;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .cta-button:hover {
+        background: linear-gradient(to right, #a855f7, #ec4899);
+        color: white;
+    }
+
+    /* Иконки-кнопки */
+    .contact-icons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    .icon-btn {
+        background: rgba(255,255,255,0.1);
+        padding: 15px 5px;
+        border-radius: 15px;
+        border: 1px solid rgba(255,255,255,0.2);
+        font-size: 12px;
+        transition: 0.3s;
+    }
+    .icon-btn:hover {
+        background: rgba(255,255,255,0.25);
+    }
+
+    .footer {
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        opacity: 0.8;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="gallery-wrapper">
+
+    <div class="gradient-bg"></div>
+
+    <!-- 20 particles -->
+    <script>
+        for (let i = 0; i < 20; i++) {
+            const p = document.createElement("div");
+            p.classList.add("particle");
+            p.style.left = Math.random() * 100 + "%";
+            p.style.top = Math.random() * 100 + "%";
+            p.style.animationDelay = Math.random() * 3 + "s";
+            document.body.appendChild(p);
+        }
+    </script>
+
+    <h1>Gotowy na zmianę?</h1>
+    <p class="subtitle">Twój wymarzony sufit jest w zasięgu ręki</p>
+
+    <div class="benefits">
+        <div class="benefit-box">🏆 15 lat doświadczenia</div>
+        <div class="benefit-box">⏱️ Montaż w 1 dzień</div>
+        <div class="benefit-box">✔️ 10 lat gwarancji</div>
+        <div class="benefit-box">⚡ Darmowy pomiar</div>
     </div>
-  );
-}
+
+    <div class="special-offer">
+        <span>⚡ OFERTA SPECJALNA</span>
+        <h2>Bezpłatny projekt 3D</h2>
+        <p>Przy zamówieniu do końca miesiąca 🎁</p>
+    </div>
+
+    <div class="cta-button">Zadzwoń teraz 📞</div>
+
+    <div class="contact-icons">
+        <div class="icon-btn">📧 Email</div>
+        <div class="icon-btn">📷 Instagram</div>
+        <div class="icon-btn">💬 WhatsApp</div>
+    </div>
+
+    <div class="footer">
+        <h3>SUFITY NAPINANE</h3>
+        <p>Transformujemy wnętrza od 2009</p>
+    </div>
+
+</div>
+
+</body>
+</html>
