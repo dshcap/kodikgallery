@@ -5,17 +5,13 @@
   <title>ALTHOUSE – sufity napinane</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: Arial, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
+      font-family: Arial, sans-serif;
       background: radial-gradient(circle at 0 0, #1f1135 0, #05010b 40%, #050208 100%);
       color: #f9fafb;
-      min-height: 100vh;
       overflow-x: hidden;
     }
 
@@ -24,88 +20,32 @@
       width: 100%;
       min-height: 100vh;
       padding: 40px 16px 60px;
-      overflow: hidden;
       display: flex;
       justify-content: center;
+      overflow: hidden;
     }
 
     .gradient-bg {
       position: fixed;
       inset: 0;
       z-index: 0;
-      background: radial-gradient(
-          circle at 30% 10%,
-          rgba(139, 92, 246, 0.35),
-          transparent 55%
-        ),
-        radial-gradient(
-          circle at 80% 40%,
-          rgba(236, 72, 153, 0.35),
-          transparent 55%
-        ),
-        radial-gradient(
-          circle at 20% 80%,
-          rgba(79, 70, 229, 0.25),
-          transparent 55%
-        );
+      background: radial-gradient(circle at 30% 10%, rgba(139,92,246,.35), transparent 55%),
+                  radial-gradient(circle at 80% 40%, rgba(236,72,153,.35), transparent 55%),
+                  radial-gradient(circle at 20% 80%, rgba(79,70,229,.25), transparent 55%);
       animation: bgmove 14s linear infinite alternate;
     }
 
     @keyframes bgmove {
-      0% {
-        transform: translate3d(0, 0, 0);
-      }
-      50% {
-        transform: translate3d(-20px, 10px, 0);
-      }
-      100% {
-        transform: translate3d(10px, -15px, 0);
-      }
-    }
-
-    .content {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 1200px;
-    }
-
-    /* Частицы */
-    .particle {
-      position: fixed;
-      width: 4px;
-      height: 4px;
-      background: #e5e7eb;
-      border-radius: 999px;
-      opacity: 0;
-      animation: particleAnim 6s infinite linear;
-      z-index: 1;
-    }
-
-    @keyframes particleAnim {
-      0% {
-        transform: translateY(0);
-        opacity: 0;
-      }
-      20% {
-        opacity: 0.9;
-      }
-      50% {
-        transform: translateY(-80px);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(0);
-        opacity: 0;
-      }
+      0% { transform: translate3d(0,0,0); }
+      50% { transform: translate3d(-20px,10px,0); }
+      100% { transform: translate3d(10px,-15px,0); }
     }
 
     h1 {
-      font-size: clamp(32px, 4vw, 40px);
       text-align: center;
-      margin: 20px 0 8px;
+      font-size: 40px;
       font-weight: 800;
-      letter-spacing: 0.04em;
+      margin: 20px 0 8px;
       background: linear-gradient(to right, #ffffff, #e9d5ff, #f9a8d4);
       -webkit-background-clip: text;
       color: transparent;
@@ -113,12 +53,12 @@
 
     p.subtitle {
       text-align: center;
-      color: rgba(249, 250, 251, 0.8);
+      opacity: .8;
       margin-bottom: 32px;
       font-size: 14px;
     }
 
-    /* Верхние “поля” преимуществ */
+    /* Верхние преимущества */
     .benefits {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -129,47 +69,33 @@
     .benefit-pill {
       padding: 10px 18px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: linear-gradient(
-        135deg,
-        rgba(15, 23, 42, 0.7),
-        rgba(15, 23, 42, 0.3)
-      );
-      backdrop-filter: blur(10px);
+      border: 1px solid rgba(148,163,184,.6);
+      background: rgba(15,23,42,.7);
       display: flex;
       justify-content: center;
-      align-items: center;
       gap: 8px;
       font-size: 13px;
-      color: #e5e7eb;
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+      box-shadow: 0 12px 30px rgba(15,23,42,.9);
     }
 
-    .benefit-pill span.icon {
-      font-size: 16px;
-    }
-
-    /* Кнопки-категории */
+    /* Категории */
     .categories {
-      margin: 10px 0 30px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       justify-content: center;
+      margin: 10px 0 30px;
     }
 
     .category-btn {
       padding: 6px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(209, 213, 219, 0.55);
-      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(209,213,219,.55);
+      background: rgba(15,23,42,.8);
       color: #f9fafb;
       font-size: 11px;
-      letter-spacing: 0.04em;
       text-transform: uppercase;
       text-decoration: none;
-      transition: 0.2s ease;
-      white-space: nowrap;
     }
 
     .category-btn:hover {
@@ -177,76 +103,45 @@
       border-color: transparent;
     }
 
-    /* Галерея проектов (фиолетовый блок) */
+    /* Галерея карточка */
     .gallery-card {
-      position: relative;
-      border-radius: 26px;
-      overflow: hidden;
-      padding: 22px 22px 18px;
-      margin-bottom: 28px;
       background: linear-gradient(120deg, #7c3aed, #ec4899, #f97316);
-      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.95);
+      padding: 22px;
+      border-radius: 26px;
+      box-shadow: 0 30px 80px rgba(15,23,42,.95);
+      margin-bottom: 28px;
     }
 
     .gallery-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 12px;
       margin-bottom: 16px;
-      font-size: 12px;
     }
-
-    .gallery-header span.badge {
-      background: rgba(255, 255, 255, 0.16);
+    .gallery-header span {
       padding: 6px 14px;
       border-radius: 999px;
+      background: rgba(255,255,255,.2);
+      font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .gallery-dots {
-      display: flex;
-      gap: 6px;
-    }
-
-    .gallery-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: rgba(249, 250, 251, 0.55);
-      opacity: 0.4;
-    }
-
-    .gallery-dot.active {
-      width: 15px;
-      background: #fefce8;
-      opacity: 1;
+      letter-spacing: .06em;
     }
 
     .gallery-slide {
       border-radius: 20px;
       overflow: hidden;
-      background: radial-gradient(circle at 20% 0, #f9fafb 0, #0f172a 55%);
-      min-height: min(300px, 60vw);
-      position: relative;
-      display: flex;
-      flex-direction: column;
+      min-height: 300px;
+      background: #000;
     }
 
     .gallery-slide img {
       width: 100%;
-      height: auto;
-      max-height: 260px;
-      object-fit: cover;
       display: block;
     }
 
     .gallery-caption {
-      padding: 10px 14px 12px;
+      padding: 12px;
       font-size: 13px;
-      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.9), transparent);
-      color: #e5e7eb;
+      background: rgba(0,0,0,.5);
     }
 
     .gallery-controls {
@@ -257,53 +152,16 @@
     }
 
     .gallery-btn {
-      border-radius: 999px;
       border: none;
+      background: rgba(15,23,42,.4);
+      border-radius: 999px;
       padding: 6px 11px;
-      background: rgba(15, 23, 42, 0.4);
-      color: #f9fafb;
+      color: #fff;
       cursor: pointer;
       font-size: 16px;
-      line-height: 1;
-      transition: 0.2s ease;
     }
 
-    .gallery-btn:hover {
-      background: rgba(15, 23, 42, 0.8);
-    }
-
-    /* Основная CTA-кнопка */
-    .cta-button {
-      width: 100%;
-      margin: 0 auto 18px;
-      padding: 15px 24px;
-      border-radius: 999px;
-      border: 1px solid rgba(248, 250, 252, 0.8);
-      background: linear-gradient(
-        90deg,
-        rgba(252, 231, 243, 0.9),
-        rgba(250, 250, 255, 0.7)
-      );
-      color: #111827;
-      font-size: 15px;
-      font-weight: 600;
-      text-align: center;
-      cursor: pointer;
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .cta-button:hover {
-      background: linear-gradient(90deg, #f9a8d4, #a855f7);
-      color: #f9fafb;
-    }
-
-    /* Контакты внизу */
     .contacts {
-      margin-top: 10px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -312,217 +170,125 @@
 
     .contact-btn {
       flex: 1 1 220px;
-      max-width: 260px;
-      padding: 10px 14px;
+      padding: 12px 14px;
       border-radius: 14px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148,163,184,.7);
+      background: rgba(15,23,42,.9);
       text-decoration: none;
       color: #e5e7eb;
-      font-size: 13px;
+      text-align: center;
+      font-size: 14px;
       display: flex;
-      align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
-    }
-
-    .contact-btn:hover {
-      background: linear-gradient(135deg, #4f46e5, #ec4899);
-      border-color: transparent;
     }
 
     .footer {
       text-align: center;
       margin-top: 32px;
-      opacity: 0.9;
     }
 
-    .footer h3 {
-      margin: 0 0 4px;
-      font-size: 16px;
-      letter-spacing: 0.16em;
-    }
-
-    .footer p {
-      margin: 0;
-      font-size: 12px;
-      color: rgba(209, 213, 219, 0.9);
-    }
-
-    @media (max-width: 640px) {
-      .benefits {
-        grid-template-columns: 1fr;
-      }
-    }
   </style>
 </head>
 <body>
-  <div class="gradient-bg"></div>
 
-  <div class="gallery-wrapper">
-    <div class="content">
-      <h1>Gotowy na zmianę?</h1>
-      <p class="subtitle">Twój wymarzony sufit jest w zasięgu ręki</p>
+<div class="gradient-bg"></div>
 
-      <!-- Верхние поля-преимущества -->
-      <div class="benefits">
-        <div class="benefit-pill">
-          <span class="icon">🏆</span> <span>15 lat doświadczenia</span>
-        </div>
-        <div class="benefit-pill">
-          <span class="icon">⏱️</span> <span>Montaż w 1 dzień</span>
-        </div>
-        <div class="benefit-pill">
-          <span class="icon">✔️</span> <span>10 lat gwarancji</span>
-        </div>
-        <div class="benefit-pill">
-          <span class="icon">⚡</span> <span>Darmowy pomiar</span>
-        </div>
+<div class="gallery-wrapper">
+  <div class="content">
+
+    <h1>Gotowy na zmianę?</h1>
+    <p class="subtitle">Twój wymarzony sufit jest w zasięgu ręki</p>
+
+    <div class="benefits">
+      <div class="benefit-pill">🏆 15 lat doświadczenia</div>
+      <div class="benefit-pill">⏱️ Montaż w 1 dzień</div>
+      <div class="benefit-pill">✔️ 10 lat gwarancji</div>
+      <div class="benefit-pill">⚡ Darmowy pomiar</div>
+    </div>
+
+    <!-- Категории -->
+    <div class="categories">
+      <a class="category-btn" href="https://www.althouse.pl/matowe-sufity">Matowe</a>
+      <a class="category-btn" href="https://www.althouse.pl/satynowe-sufity">Satynowe</a>
+      <a class="category-btn" href="https://www.althouse.pl/b%C5%82yszcz%C4%85ce-sufity">Błyszczące</a>
+      <a class="category-btn" href="https://www.althouse.pl/nadruk">Z nadrukiem</a>
+      <a class="category-btn" href="https://www.althouse.pl/paruj%C4%85ce-sufity">Unoszące się</a>
+      <a class="category-btn" href="https://www.althouse.pl/na-poddaszach">Poddasza</a>
+      <a class="category-btn" href="https://www.althouse.pl/welepoziomowe">Wielopoziomowe</a>
+      <a class="category-btn" href="https://www.althouse.pl/karniszy-schowane">Karnisze</a>
+      <a class="category-btn" href="https://www.althouse.pl/punktowe-o%C5%9Bwietlenie">Punktowe</a>
+      <a class="category-btn" href="https://www.althouse.pl/linii-%C5%9Bwietlne">Linie LED</a>
+      <a class="category-btn" href="https://www.althouse.pl/szynowe-o%C5%9Bwietlenie">Szynowe</a>
+      <a class="category-btn" href="https://www.althouse.pl/fornir-kamienny">Fornir</a>
+    </div>
+
+    <!-- Галерея -->
+    <div class="gallery-card">
+      <div class="gallery-header">
+        <span>Nasze realizacje</span>
       </div>
 
-      <!-- Кнопки-категории -->
-      <div class="categories">
-        <a class="category-btn" href="https://www.althouse.pl/matowe-sufity">Matowe sufity</a>
-        <a class="category-btn" href="https://www.althouse.pl/satynowe-sufity">Satynowe sufity</a>
-        <a class="category-btn" href="https://www.althouse.pl/b%C5%82yszcz%C4%85ce-sufity">Błyszczące sufity</a>
-        <a class="category-btn" href="https://www.althouse.pl/nadruk">Sufity z nadrukiem</a>
-        <a class="category-btn" href="https://www.althouse.pl/paruj%C4%85ce-sufity">Unoszące się sufity</a>
-        <a class="category-btn" href="https://www.althouse.pl/na-poddaszach">Na poddaszach</a>
-        <a class="category-btn" href="https://www.althouse.pl/welepoziomowe">Wielopoziomowe sufity</a>
-        <a class="category-btn" href="https://www.althouse.pl/karniszy-schowane">Schowane karnisze</a>
-        <a class="category-btn" href="https://www.althouse.pl/punktowe-o%C5%9Bwietlenie">Punktowe oświetlenie</a>
-        <a class="category-btn" href="https://www.althouse.pl/linii-%C5%9Bwietlne">Linie świetlne</a>
-        <a class="category-btn" href="https://www.althouse.pl/szynowe-o%C5%9Bwietlenie">Szynowe oświetlenie</a>
-        <a class="category-btn" href="https://www.althouse.pl/fornir-kamienny">Fornir kamienny</a>
+      <div class="gallery-slide">
+        <img id="gallery-image" src="" alt="">
+        <div class="gallery-caption" id="gallery-caption"></div>
       </div>
 
-      <!-- Галерея наших realizacji -->
-      <div class="gallery-card">
-        <div class="gallery-header">
-          <span class="badge">Nasze realizacje</span>
-          <div class="gallery-dots">
-            <div class="gallery-dot active" id="dot-0"></div>
-            <div class="gallery-dot" id="dot-1"></div>
-            <div class="gallery-dot" id="dot-2"></div>
-          </div>
-        </div>
-
-        <div class="gallery-slide">
-          <img
-            id="gallery-image"
-            src="https://www.althouse.pl/site-images/placeholder1.jpg"
-            alt="Realizacja ALTHOUSE – sufit napinany"
-          />
-          <div class="gallery-caption" id="gallery-caption">
-            Salon z czarnym sufitem błyszczącym i liniami LED.
-          </div>
-        </div>
-
-        <div class="gallery-controls">
-          <button class="gallery-btn" onclick="prevSlide()">‹</button>
-          <button class="gallery-btn" onclick="nextSlide()">›</button>
-        </div>
-      </div>
-
-      <!-- CTA -->
-      <button class="cta-button" onclick="window.location.href='tel:+48459569321'">
-        Zadzwoń teraz
-        <span>📞</span>
-      </button>
-
-      <!-- Контактные кнопки -->
-      <div class="contacts">
-        <a class="contact-btn" href="tel:+48459569321">
-          📞 +48 459 569 321
-        </a>
-        <a class="contact-btn" href="mailto:info@althouse.pl">
-          📧 info@althouse.pl
-        </a>
-        <a
-          class="contact-btn"
-          href="https://www.instagram.com/althouse.pl"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          📸 Instagram @althouse.pl
-        </a>
-        <a
-          class="contact-btn"
-          href="https://t.me/MyOwesomTestBot"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          🤖 Bot @MyOwesomTestBot
-        </a>
-      </div>
-
-      <!-- Footer -->
-      <div class="footer">
-        <h3>SUFITY NAPINANE</h3>
-        <p>Transformujemy wnętrza od 2009</p>
+      <div class="gallery-controls">
+        <button class="gallery-btn" onclick="prevSlide()">‹</button>
+        <button class="gallery-btn" onclick="nextSlide()">›</button>
       </div>
     </div>
+
+    <!-- Контакты -->
+    <div class="contacts">
+      <a class="contact-btn" href="tel:+48459569321">📞 +48 459 569 321</a>
+      <a class="contact-btn" href="mailto:info@althouse.pl">📧 info@althouse.pl</a>
+      <a class="contact-btn" href="https://www.instagram.com/althouse.pl">📸 Instagram @althouse.pl</a>
+      <a class="contact-btn" href="https://t.me/MyOwesomTestBot">🤖 Bot @MyOwesomTestBot</a>
+    </div>
+
+    <div class="footer">
+      <h3>SUFITY NAPINANE</h3>
+      <p>Transformujemy wnętrza od 2009</p>
+    </div>
+
   </div>
+</div>
 
-  <script>
-    // частицы
-    for (let i = 0; i < 26; i++) {
-      const p = document.createElement("div");
-      p.classList.add("particle");
-      p.style.left = Math.random() * 100 + "%";
-      p.style.top = Math.random() * 100 + "%";
-      p.style.animationDelay = Math.random() * 4 + "s";
-      document.body.appendChild(p);
-    }
+<script>
+  const slides = [
+    { img: "images/glyanczevyj-1.jpg", caption: "Realizacja – sufit błyszczący." },
+    { img: "images/глянец чч.jpg", caption: "Sufit czarny błyszczący." },
+    { img: "images/квадрат чб линии.jpg", caption: "Kwadratowe linie LED." },
+    { img: "images/квадраты черн глянец.jpg", caption: "Czarny połysk + linie LED." },
+    { img: "images/квадраты.jpg", caption: "Kwadratowe kompozycje oświetlenia." },
+    { img: "images/линии бел и желт.jpg", caption: "Linie LED – białe i żółte." },
+    { img: "images/линии глянец чб.jpg", caption: "Czarny połysk + białe LED." },
+    { img: "images/линии глянец.jpg", caption: "Sufit z liniami LED." },
+    { img: "images/линии черн глянец.jpg", caption: "Korytarz – czarny połysk." },
+    { img: "images/матовый и квадрат.jpg", caption: "Matowy sufit + kwadrat." },
+    { img: "images/матовый и черн квадрат.jpg", caption: "Matowy + czarny motyw." },
+    { img: "images/сатин и квадрат.jpg", caption: "Satinowy sufit + LED." },
+    { img: "images/черн глянец квадрат.jpg", caption: "Czarny połysk – kwadrat LED." }
+  ];
 
-    // простой слайдер галереи
-    const slides = [
-      {
-        img: "https://www.althouse.pl/site-images/placeholder1.jpg",
-        caption: "Salon z czarnym sufitem błyszczącym i liniami LED.",
-      },
-      {
-        img: "https://www.althouse.pl/site-images/placeholder2.jpg",
-        caption: "Sypialnia z matowym sufitem i ukrytym karniszem.",
-      },
-      {
-        img: "https://www.althouse.pl/site-images/placeholder3.jpg",
-        caption: "Kuchnia z liniami świetlnymi i sufitem satynowym.",
-      },
-    ];
+  let currentSlide = 0;
+  const imgEl = document.getElementById("gallery-image");
+  const captionEl = document.getElementById("gallery-caption");
 
-    let currentSlide = 0;
-    const imgEl = document.getElementById("gallery-image");
-    const captionEl = document.getElementById("gallery-caption");
+  function showSlide(i) {
+    currentSlide = (i + slides.length) % slides.length;
+    imgEl.src = slides[currentSlide].img;
+    captionEl.textContent = slides[currentSlide].caption;
+  }
 
-    function updateDots() {
-      slides.forEach((_, i) => {
-        const dot = document.getElementById("dot-" + i);
-        if (!dot) return;
-        dot.classList.toggle("active", i === currentSlide);
-      });
-    }
+  function nextSlide() { showSlide(currentSlide + 1); }
+  function prevSlide() { showSlide(currentSlide - 1); }
 
-    function showSlide(index) {
-      currentSlide = (index + slides.length) % slides.length;
-      const slide = slides[currentSlide];
-      imgEl.src = slide.img;
-      imgEl.alt = slide.caption;
-      captionEl.textContent = slide.caption;
-      updateDots();
-    }
+  showSlide(0);
+  setInterval(nextSlide, 6000);
+</script>
 
-    function nextSlide() {
-      showSlide(currentSlide + 1);
-    }
-
-    function prevSlide() {
-      showSlide(currentSlide - 1);
-    }
-
-    setInterval(nextSlide, 6000);
-    showSlide(0);
-  </script>
 </body>
 </html>
