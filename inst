@@ -1,0 +1,245 @@
+import { motion } from 'motion/react';
+import { Phone, Mail, Instagram, MessageCircle, Zap, Award, Clock, CheckCircle } from 'lucide-react';
+
+export function ModernCTASlide() {
+  const benefits = [
+    { icon: Award, text: '15 lat doświadczenia' },
+    { icon: Clock, text: 'Montaż w 1 dzień' },
+    { icon: CheckCircle, text: '10 lat gwarancji' },
+    { icon: Zap, text: 'Darmowy pomiar' }
+  ];
+
+  return (
+    <div className="relative w-full h-full bg-black overflow-hidden">
+      {/* Animated gradient background */}
+      <motion.div
+        className="absolute inset-0"
+        animate={{
+          background: [
+            'radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.4) 0%, transparent 50%), radial-gradient(circle at 70% 50%, rgba(236, 72, 153, 0.4) 0%, transparent 50%)',
+            'radial-gradient(circle at 70% 50%, rgba(139, 92, 246, 0.4) 0%, transparent 50%), radial-gradient(circle at 30% 50%, rgba(236, 72, 153, 0.4) 0%, transparent 50%)',
+            'radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.4) 0%, transparent 50%), radial-gradient(circle at 70% 50%, rgba(236, 72, 153, 0.4) 0%, transparent 50%)'
+          ]
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Mesh gradient overlay */}
+      <div className="absolute inset-0 opacity-50">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.2) 0%, transparent 50%)
+          `
+        }} />
+      </div>
+
+      {/* Animated particles */}
+      {[...Array(20)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 bg-white rounded-full"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+          }}
+          animate={{
+            y: [0, -50, 0],
+            opacity: [0, 1, 0],
+            scale: [0, 1.5, 0]
+          }}
+          transition={{
+            duration: 3 + Math.random() * 2,
+            repeat: Infinity,
+            delay: Math.random() * 3
+          }}
+        />
+      ))}
+
+      {/* Content */}
+      <div className="relative h-full flex flex-col p-8 text-white">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-6"
+        >
+          <motion.div
+            animate={{
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="inline-block mb-4"
+          >
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-xl opacity-60" />
+              <div className="relative bg-gradient-to-br from-purple-500 to-pink-500 p-4 rounded-full">
+                <Zap className="w-8 h-8 text-white" />
+              </div>
+            </div>
+          </motion.div>
+          
+          <h2 className="text-4xl mb-2 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+            Gotowy na zmianę?
+          </h2>
+          <p className="text-white/70 text-sm">
+            Twój wymarzony sufit jest w zasięgu ręki
+          </p>
+        </motion.div>
+
+        {/* Benefits grid */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2 }}
+          className="grid grid-cols-2 gap-3 mb-6"
+        >
+          {benefits.map((benefit, index) => {
+            const Icon = benefit.icon;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + index * 0.1 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                className="bg-white/5 backdrop-blur-xl rounded-2xl p-4 border border-white/10 hover:border-white/20 transition-all group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-2 rounded-xl group-hover:shadow-lg transition-all">
+                    <Icon className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="text-xs text-white/90">{benefit.text}</span>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* Special offer */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6 }}
+          className="relative mb-6 overflow-hidden"
+        >
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600"
+            animate={{
+              x: ['-100%', '100%']
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            style={{ filter: 'blur(20px)', opacity: 0.3 }}
+          />
+          <div className="relative bg-gradient-to-br from-purple-600 to-pink-600 rounded-3xl p-5 shadow-2xl">
+            <div className="flex items-center justify-between mb-3">
+              <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs">
+                ⚡ OFERTA SPECJALNA
+              </span>
+              <motion.div
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="text-2xl"
+              >
+                🎁
+              </motion.div>
+            </div>
+            <h3 className="text-xl mb-2">
+              Bezpłatny projekt 3D
+            </h3>
+            <p className="text-white/80 text-sm">
+              Przy zamówieniu do końca miesiąca
+            </p>
+          </div>
+        </motion.div>
+
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="space-y-3 mb-6"
+        >
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full bg-white text-black py-4 rounded-2xl shadow-xl flex items-center justify-center gap-3 relative overflow-hidden group"
+          >
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity"
+            />
+            <Phone className="w-5 h-5 relative z-10 group-hover:text-white transition-colors" />
+            <span className="relative z-10 group-hover:text-white transition-colors">
+              Zadzwoń teraz
+            </span>
+          </motion.button>
+
+          <div className="grid grid-cols-3 gap-3">
+            {[
+              { icon: Mail, label: 'Email' },
+              { icon: Instagram, label: 'Instagram' },
+              { icon: MessageCircle, label: 'WhatsApp' }
+            ].map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.button
+                  key={index}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1 + index * 0.1 }}
+                  className="bg-white/10 backdrop-blur-xl hover:bg-white/20 border border-white/20 py-3 rounded-xl flex flex-col items-center gap-2 transition-all"
+                >
+                  <Icon className="w-5 h-5" />
+                  <span className="text-xs">{item.label}</span>
+                </motion.button>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* Footer */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+          className="text-center mt-auto"
+        >
+          <p className="text-xl mb-1 bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
+            SUFITY NAPINANE
+          </p>
+          <p className="text-white/50 text-xs">
+            Transformujemy wnętrza od 2009
+          </p>
+          <div className="flex items-center justify-center gap-2 mt-3">
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"
+                animate={{
+                  scale: [1, 1.3, 1],
+                  opacity: [0.5, 1, 0.5]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: i * 0.3
+                }}
+              />
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
